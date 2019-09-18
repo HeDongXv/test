@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<typeAliases>
+		<typeAlias alias="Dept" type="com.orilore.model.Dept"/>
+		<typeAlias alias="Emp" type="com.orilore.model.Emp"/>
+		<typeAlias alias="Role" type="com.orilore.model.Role"/>
+		<typeAlias alias="Node" type="com.orilore.model.Node"/>
+	</typeAliases>
+	<plugins>
+	    <plugin interceptor ="com.github.pagehelper.PageHelper">
+	        <property name ="dialect" value="mysql"/>
+	        <property name ="offsetAsPageNum" value="true"/>
+	        <property name ="rowBoundsWithCount " value="true" />
+	        <property name ="pageSizeZero" value="true" />
+	        <property name ="reasonable" value="true" />
+	    </plugin>
+	</plugins>
+	
+    <environments default="development">
+        <environment id="development">
+            <transactionManager type="JDBC" />
+            <!-- 配置数据库连接信息 -->
+            <dataSource type="POOLED">
+                <property name="driver" value="com.mysql.jdbc.Driver" />
+                <property name="url" value="jdbc:mysql://localhost:3306/test"/>
+                <property name="username" value="root" />
+                <property name="password" value="liren5a122" />
+            </dataSource>
+        </environment>
+    </environments>     
+    <mappers>
+		<mapper resource="com/orilore/model/Dept.xml"/>
+		<mapper resource="com/orilore/model/Emp.xml"/>
+		<mapper resource="com/orilore/model/Role.xml"/>
+		<mapper resource="com/orilore/model/Node.xml"/>
+	</mappers>
+</configuration>

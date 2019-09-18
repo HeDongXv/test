@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/hotel
+    username: root
+    password: liren5a122
+mybatis:
+  config-location: classpath:Configuration.xml    

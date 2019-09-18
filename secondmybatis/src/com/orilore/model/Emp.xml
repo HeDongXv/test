@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.orilore.mapper.EmpMapper">
+<!-- column取得select中的结果值 -->
+	<resultMap type="Emp" id="empMap">
+		<id column="id" property="id"/>
+		<result column="name" property="name"/>
+		<result column="sex" property="sex"/>
+		<result column="birthday" property="birthday"/>
+		<result column="addr" property="addr"/>
+		<result column="phone" property="phone"/>
+		<result column="photo" property="photo"/>
+		<result column="job" property="job"/>
+		<association property="dept" javaType="Dept">
+			<id column="did" property="id"/>
+			<result column="dname" property="name"/>
+			<result column="daddr" property="addr"/>
+		</association>
+	</resultMap>
+	<select id="selectOne" parameterType="int" resultMap="empMap">
+		select a.id,a.name,a.sex,a.birthday,a.addr,a.phone,a.photo,a.job,
+		b.id did,b.name dname,b.addr daddr
+		from emp a left join dept b on a.deptid=b.id
+		where a.id=#{0}
+	</select>
+	<select id="select" resultMap="empMap">
+		select a.id,a.name,a.sex,a.birthday,a.addr,a.phone,a.photo,a.job,
+		b.id did,b.name dname,b.addr daddr
+		from emp a left join dept b on a.deptid=b.id
+		where a.status!=-1
+	</select>
+	<insert id="insert" parameterType="Emp">
+		insert into emp(name,sex,birthday,addr,phone,photo,job,deptid) 
+		values(#{name},#{sex},#{birthday},#{addr},#{phone},#{photo},#{job},#{dept.id})
+	</insert>	
+	<delete id="delete" parameterType="int">
+		update emp set status=-1 where id=#{0}         
+	</delete>
+	<update id="update" parameterType="Emp">
+		update emp set name=#{name},sex=#{sex},birthday=#{birthday},addr=#{addr},phone=#{phone},
+		photo=#{photo},job=#{job},deptid=#{dept.id} where id=#{id}
+	</update>
+</mapper>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.orilore.mapper.RoleMapper">
+	<resultMap type="Role" id="roleMap">
+		<id column="rid" property="id"/>
+		<result column="rname" property="name"/>
+	</resultMap>
+	<resultMap type="Role" id="roleNodeMap" extends="roleMap">
+		<collection property="nodes" ofType="Node">
+			<id column="nid" property="id"/>
+			<result column="nname" property="name"/>
+			<result column="url" property="url"/>
+		</collection>
+	</resultMap>
+	<select id="selectOne" parameterType="int" resultMap="roleNodeMap">
+		select a.*,c.* from role a
+		left join rn b on a.rid=b.rid
+		left join node c on c.nid=b.nid
+		where a.rid=#{0}
+	</select>
+	<select id="select" resultMap="roleNodeMap">
+		select a.*,c.* from role a
+		left join rn b on a.rid=b.rid
+		left join node c on c.nid=b.nid
+	</select>
+	
+</mapper>

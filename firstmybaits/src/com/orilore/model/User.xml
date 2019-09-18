@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.orilore.dao.IUserDAO">
+	
+	<select id="selectOne" parameterType="int" resultType="User">
+		select * from auser where id=#{0}
+	</select>
+	<select id="select" resultType="User">
+		select * from auser
+	</select>
+	<insert id="insert" parameterType="User">
+		insert into auser(name,card,money) values(#{name},#{card},#{money})
+	</insert>	
+	<delete id="delete" parameterType="int">
+	<!-- 0表示第1个参数 -->
+		delete from auser where id=#{0}           
+	</delete>
+	<update id="update" parameterType="User">
+		update auser set name=#{name},card=#{card},money=#{money} where id=#{id}
+	</update>
+</mapper>

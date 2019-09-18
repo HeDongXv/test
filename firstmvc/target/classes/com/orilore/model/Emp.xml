@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.orilore.mapper.EmpMapper">
+	<resultMap type="Emp" id="empResultMap">
+		<id column="id" property="id"/>
+		<result column="name" property="name"/>
+		<result column="sex" property="sex"/>
+		<result column="birthday" property="birthday"/>
+		<result column="phone" property="phone"/>
+		<result column="addr" property="addr"/>
+		<result column="job" property="job"/>
+		<result column="photo" property="photo"/>
+		<result column="status" property="status"/>
+		<association property="dept" javaType="Dept">
+			<id column="did" property="id"/>
+			<result column="dname" property="name"/>
+			<result column="daddr" property="addr"/>
+		</association>
+	</resultMap>
+	<select id="selectOne" parameterType="Integer" resultMap="empResultMap">
+		select a.id did,a.name dname,a.addr daddr,b.* 
+		from dept a right join emp b on a.id=b.deptid
+		 where b.id=#{0}
+	</select>
+	<select id="select" resultMap="empResultMap">
+		select a.id did,a.name dname,a.addr daddr,b.* 
+		from dept a right join emp b on a.id=b.deptid
+		where b.status!=-1
+	</select>
+	<insert id="insert" parameterType="Emp">
+		insert into emp(name,sex,birthday,phone,addr,job,photo,deptid) values(#{name},#{sex},#{birthday},#{phone},#{addr},#{job},#{photo},#{dept.id})
+	</insert>
+	<delete id="delete" parameterType="Integer">
+		update emp set status=-1 where id=#{0}
+	</delete>
+	<update id="update" parameterType="Emp">
+		update emp set name=#{name},sex=#{sex},birthday=#{birthday},phone=#{phone},addr=#{addr},job=#{job},photo=#{photo},deptid=#{dept.id} where id=#{id}
+	</update>
+</mapper>

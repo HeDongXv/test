@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<link href="css/bootstrap.min.css" rel="stylesheet" type="text/css">
+	<script type="text/javascript" src="js/jquery.js"></script>
+	<script type="text/javascript" src="js/kind.js"></script>
+	<title>客房类别管理</title>
+</head>
+<body>
+	<div class="container">
+		<div class="row" style="margin-top:15px">
+			<div class="col-md-3">
+				<input id="id" type="hidden">
+				<input placeholder="类型名称" class="form-control" id="name">
+			</div>
+			<div class="col-md-3">
+				<input placeholder="图标" class="form-control" id="icon">
+			</div>
+			<div class="col-md-5">
+				<input placeholder="备注" class="form-control" id="info">
+			</div>
+			<div class="col-md-1">
+				<button id="btnsave" class="btn btn-primary btn-md">保存</button>
+			</div>
+		</div>
+		<div class="row" style="margin-top:15px">
+			<div class="col-md-12">
+				<div class="table-responsive">
+					<table class="table table-bordered table-striped table-hover">
+						<thead>
+							<tr>
+								<th>序号</th>
+								<th>类型名称</th>
+								<th>图标</th>
+								<th>备注</th>
+								<th class='text-center'>编辑</th>
+								<th class='text-center'>删除</th>
+							</tr>
+						</thead>
+						<tbody id="tb"></tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+		<div class="row" style="margin-top:15px">
+			<div class="col-md-12">
+				<p id="msg"></p>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
